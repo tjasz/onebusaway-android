@@ -35,7 +35,8 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
-import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -45,7 +46,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.onebusaway.android.BuildConfig;
 import org.onebusaway.android.R;
 import org.onebusaway.android.app.Application;
 import org.onebusaway.android.io.elements.ObaReferences;
@@ -58,8 +58,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import androidx.core.content.ContextCompat;
 
 public class StopOverlay implements MarkerListeners {
 
@@ -130,10 +128,10 @@ public class StopOverlay implements MarkerListeners {
             return false;
         }
 
-        if (BuildConfig.DEBUG) {
-            // Show the stop_id in a toast for debug purposes
-            Toast.makeText(mActivity, stop.getId(), Toast.LENGTH_SHORT).show();
-        }
+//        if (BuildConfig.DEBUG) {
+//            // Show the stop_id in a toast for debug purposes
+//            Toast.makeText(mActivity, stop.getId(), Toast.LENGTH_SHORT).show();
+//        }
 
         doFocusChange(stop);
 

@@ -15,6 +15,13 @@
  */
 package org.onebusaway.android.nav.test;
 
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.test.runner.AndroidJUnit4;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Assume;
 import org.junit.Test;
@@ -26,17 +33,10 @@ import org.onebusaway.android.nav.model.Path;
 import org.onebusaway.android.nav.model.PathLink;
 import org.onebusaway.android.util.LocationUtils;
 
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Build;
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import androidx.test.runner.AndroidJUnit4;
 
 import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static junit.framework.Assert.assertTrue;
@@ -54,7 +54,7 @@ public class NavigationTest extends ObaTestCase {
 
     private static final String TAG = "NavigationTest";
 
-    private static final long SPEED_UP = 1000000L;
+    private static final long SPEED_UP = 1000L;
 
     /**
      * Started Stop: Mckinley Dr @ DOT Bldg
@@ -218,6 +218,7 @@ public class NavigationTest extends ObaTestCase {
      * Destination Stop: Bush Blvd @ Armenia Av
      * Recorded In: Car following Bus (Route 39) 3 stops
      * Device Used: Nexus 5
+     * // Used this test for destination reminders demo with SPEED_UP = 1000L
      */
     @Test
     public void testTrip7C() throws IOException {

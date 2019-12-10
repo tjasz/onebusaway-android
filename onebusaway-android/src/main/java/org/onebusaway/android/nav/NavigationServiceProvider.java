@@ -15,16 +15,6 @@
  */
 package org.onebusaway.android.nav;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-
-import org.onebusaway.android.R;
-import org.onebusaway.android.app.Application;
-import org.onebusaway.android.io.ObaAnalytics;
-import org.onebusaway.android.nav.model.Path;
-import org.onebusaway.android.nav.model.PathLink;
-import org.onebusaway.android.ui.TripDetailsActivity;
-import org.onebusaway.android.util.RegionUtils;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -36,10 +26,20 @@ import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import org.onebusaway.android.R;
+import org.onebusaway.android.app.Application;
+import org.onebusaway.android.io.ObaAnalytics;
+import org.onebusaway.android.nav.model.Path;
+import org.onebusaway.android.nav.model.PathLink;
+import org.onebusaway.android.ui.TripDetailsActivity;
+import org.onebusaway.android.util.RegionUtils;
+
 import java.text.DecimalFormat;
 import java.util.Locale;
-
-import androidx.core.app.NotificationCompat;
 
 /**
  * This class provides the navigation functionality for the destination reminders
@@ -681,6 +681,11 @@ public class NavigationServiceProvider implements TextToSpeech.OnInitListener {
             receiverIntent.putExtra(NavigationReceiver.NOTIFICATION_ID, NOTIFICATION_ID + 2);
             PendingIntent pDelIntent = PendingIntent.getBroadcast(app.getApplicationContext(),
                     0, receiverIntent, 0);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             String message = Application.get().getString(R.string.destination_voice_request_stop);
             // TODO: Slow down voice commands, add count as property.
