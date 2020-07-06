@@ -147,7 +147,8 @@ public class TripInfoActivity extends AppCompatActivity {
                 ObaContract.Trips.DAYS,
                 ObaContract.Trips.ROUTE_ID,
                 ObaContract.Trips.HEADSIGN,
-                ObaContract.Trips.DEPARTURE
+                ObaContract.Trips.DEPARTURE,
+                ObaContract.Trips.EVENT
         };
 
         private static final int COL_NAME = 0;
@@ -161,6 +162,8 @@ public class TripInfoActivity extends AppCompatActivity {
         private static final int COL_HEADSIGN = 4;
 
         private static final int COL_DEPARTURE = 5;
+
+        private static final int COL_EVENT = 6;
 
         private Uri mTripUri;
 
@@ -278,10 +281,16 @@ public class TripInfoActivity extends AppCompatActivity {
                 mReminderTime = 10;
                 return false;
             }
+            if (cursor == null || cursor.getCount() < 6) {
+                // Reminder defaults to 10 in the UI
+                mReminderEvent = ObaContract.Trips.EVENT_ESTIMATED;
+                return false;
+            }
             cursor.moveToFirst();
             mTripName = cursor.getString(COL_NAME);
             mReminderTime = cursor.getInt(COL_REMINDER);
             mReminderDays = cursor.getInt(COL_DAYS);
+            mReminderEvent = cursor.getInt(COL_EVENT);
 
             // If some values weren't set in the bundle, assign them the
             // values in the db.

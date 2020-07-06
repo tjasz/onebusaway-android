@@ -351,7 +351,8 @@ public class ObaProvider extends ContentProvider {
                             ObaContract.Trips.HEADSIGN + " VARCHAR NOT NULL, " +
                             ObaContract.Trips.NAME + " VARCHAR NOT NULL, " +
                             ObaContract.Trips.REMINDER + " INTEGER NOT NULL, " +
-                            ObaContract.Trips.DAYS + " INTEGER NOT NULL" +
+                            ObaContract.Trips.DAYS + " INTEGER NOT NULL, " +
+                            ObaContract.Trips.EVENT + " INTEGER NOT NULL" +
                             ");");
         }
 
@@ -515,6 +516,7 @@ public class ObaProvider extends ContentProvider {
         sTripsProjectionMap.put(ObaContract.Trips.NAME, ObaContract.Trips.NAME);
         sTripsProjectionMap.put(ObaContract.Trips.REMINDER, ObaContract.Trips.REMINDER);
         sTripsProjectionMap.put(ObaContract.Trips.DAYS, ObaContract.Trips.DAYS);
+        sTripsProjectionMap.put(ObaContract.Trips.EVENT, ObaContract.Trips.EVENT);
         sTripsProjectionMap.put(ObaContract.Trips._COUNT, "count(*)");
 
         sTripAlertsProjectionMap = new HashMap<String, String>();
