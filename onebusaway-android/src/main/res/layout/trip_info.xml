@@ -96,6 +96,18 @@
             </Spinner>
 
             <TextView
+                style="@style/FormLabel"
+                android:text="@string/trip_info_reminder_event_header"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <Spinner
+                android:id="@+id/trip_info_reminder_event"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <TextView
                     style="@style/FormLabel"
                     android:text="@string/trip_info_reminder_repeat"
                     android:layout_width="fill_parent"

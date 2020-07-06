@@ -74,6 +74,11 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <string-array name="reminder_event">
+        <item>before estimated departure</item>
+        <item>before scheduled departure</item>
+        <item>before earliest of the two</item>
+    </string-array>
     <string-array name="report_stop_problem_code">
         <item>Choose a problem</item>
         <item>Stop name is wrong</item>

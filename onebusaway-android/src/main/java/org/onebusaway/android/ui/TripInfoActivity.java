@@ -75,6 +75,8 @@ public class TripInfoActivity extends AppCompatActivity {
 
     private static final String REMINDER_TIME = ".ReminderTime";
 
+    private static final String REMINDER_EVENT = ".ReminderEvent";
+
     private static final String REMINDER_DAYS = ".ReminderDays";
 
     public static void start(Context context, String tripId, String stopId) {
@@ -180,6 +182,8 @@ public class TripInfoActivity extends AppCompatActivity {
 
         private int mReminderTime; // DB Value, not selection value
 
+        private int mReminderEvent;
+
         private int mReminderDays;
 
         private boolean mNewTrip = true;
@@ -264,6 +268,7 @@ public class TripInfoActivity extends AppCompatActivity {
 
             mReminderTime = bundle.getInt(REMINDER_TIME, mReminderTime);
             mReminderDays = bundle.getInt(REMINDER_DAYS, mReminderDays);
+            mReminderEvent = bundle.getInt(REMINDER_EVENT, mReminderEvent);
             return true;
         }
 
@@ -312,6 +317,12 @@ public class TripInfoActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             reminder.setAdapter(adapter);
 
+            final Spinner event = (Spinner) view.findViewById(R.id.trip_info_reminder_event);
+            ArrayAdapter<?> event_adapter = ArrayAdapter.createFromResource(
+                    getActivity(), R.array.reminder_event, android.R.layout.simple_spinner_item);
+            event_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            event.setAdapter(event_adapter);
+
             //
             // Static (header values)
             //
@@ -332,6 +343,7 @@ public class TripInfoActivity extends AppCompatActivity {
             tripName.setText(mTripName);
 
             reminder.setSelection(reminderToSelection(mReminderTime));
+            event.setSelection(mReminderEvent);
 
             final Button repeats = (Button) view.findViewById(R.id.trip_info_reminder_days);
             repeats.setText(getRepeatText(getActivity(), mReminderDays));
@@ -365,12 +377,16 @@ public class TripInfoActivity extends AppCompatActivity {
 
             View view = getView();
             Spinner reminderView = (Spinner) view.findViewById(R.id.trip_info_reminder_time);
+            Spinner eventView = (Spinner) view.findViewById(R.id.trip_info_reminder_event);
             TextView nameView = (TextView) view.findViewById(R.id.name);
 
             final int reminder = selectionToReminder(reminderView
                     .getSelectedItemPosition());
+            final int event = eventView
+                    .getSelectedItemPosition();
             outState.putString(TRIP_NAME, nameView.getText().toString());
             outState.putInt(REMINDER_TIME, reminder);
+            outState.putInt(REMINDER_EVENT, event);
             outState.putInt(REMINDER_DAYS, mReminderDays);
         }
 
@@ -416,9 +432,12 @@ public class TripInfoActivity extends AppCompatActivity {
             //
             View view = getView();
             final Spinner reminderView = (Spinner) view.findViewById(R.id.trip_info_reminder_time);
+            final Spinner eventView = (Spinner) view.findViewById(R.id.trip_info_reminder_event);
             final TextView nameView = (TextView) view.findViewById(R.id.name);
 
             final int reminder = selectionToReminder(reminderView
+                    .getSelectedItemPosition());
+            final int event = selectionToReminder(eventView
                     .getSelectedItemPosition());
 
             ContentValues values = new ContentValues();
@@ -428,6 +447,7 @@ public class TripInfoActivity extends AppCompatActivity {
             values.put(ObaContract.Trips.HEADSIGN, mHeadsign);
             values.put(ObaContract.Trips.NAME, nameView.getText().toString());
             values.put(ObaContract.Trips.REMINDER, reminder);
+            values.put(ObaContract.Trips.EVENT, event);
             values.put(ObaContract.Trips.DAYS, mReminderDays);
 
             // Insert or update?

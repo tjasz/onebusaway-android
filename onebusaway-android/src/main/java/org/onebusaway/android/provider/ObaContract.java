@@ -214,6 +214,15 @@ public final class ObaContract {
          * </P>
          */
         public static final String DAYS = "days";
+
+        /**
+         * The event to base the departure reminder on.
+         * Can be SCHEDULED departure, ESTIMATED departure, or EARLIEST of the two.
+         * <P>
+         * Type: INTEGER
+         * </P>
+         */
+        public static final String EVENT = "event";
     }
 
     protected interface TripAlertsColumns {
@@ -968,6 +977,12 @@ public final class ObaContract {
                 | DAY_THU | DAY_FRI;
 
         public static final int DAY_ALL = DAY_WEEKDAY | DAY_SUN | DAY_SAT;
+
+        public static final int EVENT_ESTIMATED = 0;
+
+        public static final int EVENT_SCHEDULED = 1;
+
+        public static final int EVENT_EARLIEST = 2;
 
         public static Uri buildUri(String tripId, String stopId) {
             return CONTENT_URI.buildUpon().appendPath(tripId)
